@@ -13,7 +13,8 @@ var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + d.getDate();
 // var URL = 'https://raw.githubusercontent.com/AsteroidTracker/AsteroidTrackerService/master/v2/neo_recent/recent';
 // var URL = 'https://raw.githubusercontent.com/AsteroidTracker/AsteroidTrackerService/master/v2/neo_upcoming/upcoming';
 // http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date=2015-04-27&end_date=2015-04-27
-var URL = "http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
+// var URL = "http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
+var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
 
      ajax({
        url: URL,
@@ -43,6 +44,6 @@ var URL = "http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date=
   },
   function(error) {
     // Failure!
-    console.log('Failed fetching Asteroid data: ' + error);
+    console.log('Failed fetching Asteroid data: ' + URL +  error);
   }
 );
