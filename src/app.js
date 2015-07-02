@@ -5,10 +5,15 @@ var asteroids = [];
 function getMonthPlus(date) {
     var month = date.getMonth()+1;
     return month < 10 ? '0' + month : month; // ('' + month) for string result
+}
+
+function getDayPlus(date) {
+    var day = date.getDate();
+    return day < 10 ? '0' + day : day; // ('' + day) for string result
 }  
 
 var d = new Date();
-var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + d.getDate();
+var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + getDayPlus(d);
 var asteroid_list = new UI.Menu({
       sections: [{
         title: 'Asteroid Today',
@@ -21,7 +26,7 @@ var asteroid_list = new UI.Menu({
 // http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date=2015-04-27&end_date=2015-04-27
 // var URL = "http://mysterious-thicket-9681.herokuapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
 var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
-
+     console.log(" URL !" + URL);
      ajax({
        url: URL,
        type: 'json'
