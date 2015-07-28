@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "AsteroidTracker",
-    "longName": "Pebble.js Tutorial 1-2",
+    "longName": "AsteroidToday",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -28,6 +28,11 @@
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
+            },
+            {
+                "file": "images/androidlogo.png",
+                "name": "IMAGES_ANDROIDLOGO_PNG",
+                "type": "png"
             }
         ]
     },
