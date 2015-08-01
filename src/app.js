@@ -16,6 +16,7 @@ function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 }
 
+
 var Vector2 = require('vector2');
 var splashWindow = new UI.Window();
 var logo = new UI.Image({
@@ -25,8 +26,14 @@ var logo = new UI.Image({
   image: 'images/androidlogo.png',
 });
 
-splashWindow.add(logo)
+splashWindow.add(logo);
 splashWindow.show();
+
+setTimeout(function() {
+  // Hide the splashScreen to avoid showing it when the user press Back.
+  splashWindow.hide();
+}, 400);
+
 
 var d = new Date();
 var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + getDayPlus(d);
@@ -76,11 +83,12 @@ asteroid_list.on('select', function(event) {
         'Velocity: \n'+
         asteroids[event.itemIndex].relvel + ' kph\n'+
         'Distance:'+ '\n'+
-        '-Lunar:'+'\n--'+asteroids[event.itemIndex].lunarDistance +
-        '-Kilometers:' +'\n--'+asteroids[event.itemIndex].kilometers +
-        '\nAbsolute mag\n' +asteroids[event.itemIndex].absoluteMag;
+        '-Lunar:'+asteroids[event.itemIndex].lunarDistance + '\n' +
+        '-Kilometers:' +asteroids[event.itemIndex].kilometers + '\n' +
+        'Absolute mag\n' +asteroids[event.itemIndex].absoluteMag;
     
-    showCardUI(content, event);
+//    showCardUI(content, event);
+    showDetailsUI(content, event);
 });
 
 function showCardUI(content, event) {
@@ -93,3 +101,19 @@ function showCardUI(content, event) {
     detailCard.show();
 }
 
+function showDetailsUI(content, event) {
+  var detailsWindow = new UI.Window();
+  var text = new UI.Text({
+    position: new Vector2(0, 0),
+    size: new Vector2(144, 168),
+    text:content,
+    font:'GOTHIC_18_BOLD',
+    color:'black',
+    textOverflow:'wrap',
+    textAlign:'center',
+    backgroundColor:'white',
+    scrollable: true
+  });
+    detailsWindow.add(text);
+    detailsWindow.show();
+}
