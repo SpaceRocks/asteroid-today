@@ -32,7 +32,7 @@ splashWindow.show();
 setTimeout(function() {
   // Hide the splashScreen to avoid showing it when the user press Back.
   splashWindow.hide();
-}, 400);
+}, 600);
 
 
 var d = new Date();
