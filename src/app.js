@@ -59,7 +59,7 @@ var asteroid_list = new UI.Menu({
          var obj = nearEarthObjects[todayDate][i];
          var lunarDistance = obj.close_approach_data[0].miss_distance.lunar;
          var kilometers = obj.close_approach_data[0].miss_distance.kilometers;
-         var relativeVelocity = obj.close_approach_data[0].relative_velocity.kph;
+         var relativeVelocity = obj.close_approach_data[0].relative_velocity.kilometers_per_hour;
          var absoluteMag = obj.absolute_magnitude_h;
          asteroids.push( {
              title: obj.name,
