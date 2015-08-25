@@ -83,8 +83,8 @@ asteroid_list.on('select', function(event) {
         'Velocity: \n'+
         asteroids[event.itemIndex].relvel + ' kph\n'+
         'Distance:'+ '\n'+
-        '-Lunar:'+asteroids[event.itemIndex].lunarDistance + '\n' +
-        '-Kilometers:' +asteroids[event.itemIndex].kilometers + '\n' +
+        '-Lunar: '+asteroids[event.itemIndex].lunarDistance + '\n' +
+        '-Kilometers: ' +asteroids[event.itemIndex].kilometers + '\n' +
         'Absolute mag\n' +asteroids[event.itemIndex].absoluteMag;
     
 //    showCardUI(content, event);
