@@ -40,7 +40,7 @@
     "shortName": "AsteroidToday",
     "uuid": "09c71da6-c9f4-4ad5-a3b0-0d85d3431900",
     "versionCode": 1,
-    "versionLabel": "1.1",
+    "versionLabel": "2.0",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false

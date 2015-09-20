@@ -29,12 +29,6 @@ var logo = new UI.Image({
 splashWindow.add(logo);
 splashWindow.show();
 
-setTimeout(function() {
-  // Hide the splashScreen to avoid showing it when the user press Back.
-  splashWindow.hide();
-}, 600);
-
-
 var d = new Date();
 var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + getDayPlus(d);
 var asteroid_list = new UI.Menu({
@@ -45,7 +39,7 @@ var asteroid_list = new UI.Menu({
      });
 
      var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
-     console.log(" URL !" + URL);
+     console.log(" URL : " + URL);
      ajax({
        url: URL,
        type: 'json'
@@ -70,7 +64,7 @@ var asteroid_list = new UI.Menu({
              kilometers: formatNumber(parseInt(kilometers.replace(',', ''))),
          });
      }
-
+    splashWindow.hide();
     asteroid_list.show();
   },
   function(error) {
