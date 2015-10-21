@@ -42,7 +42,8 @@ var asteroid_list = new UI.Menu({
      console.log(" URL : " + URL);
      ajax({
        url: URL,
-       type: 'json'
+       type: 'json',
+       headers: { 'x-request-neows': 'neows_pebble' }
      },
      function(data) {
        // Success!
