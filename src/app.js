@@ -16,7 +16,6 @@ function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 }
 
-
 var Vector2 = require('vector2');
 var splashWindow = new UI.Window();
 var logo = new UI.Image({
@@ -38,6 +37,10 @@ var asteroid_list = new UI.Menu({
        }]
      });
 
+var noAsteroidCard = new UI.Card({
+    body: "0 Asteroids Today"
+  });
+
      var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
      console.log(" URL : " + URL);
      ajax({
@@ -49,24 +52,30 @@ var asteroid_list = new UI.Menu({
        // Success!
        // console.log("Successfully fetched Asteroid data!" + data);
        var object = data;
-       var nearEarthObjects = object.near_earth_objects ;
-       for(var i = 0; i < nearEarthObjects[todayDate].length; i++) {
-         var obj = nearEarthObjects[todayDate][i];
-         var lunarDistance = obj.close_approach_data[0].miss_distance.lunar;
-         var kilometers = obj.close_approach_data[0].miss_distance.kilometers;
-         var relativeVelocity = obj.close_approach_data[0].relative_velocity.kilometers_per_hour;
-         var absoluteMag = obj.absolute_magnitude_h;
-         asteroids.push( {
-             title: obj.name,
-             subtitle: "Lunar Distance " + lunarDistance,
-             relvel: formatNumber(parseInt(relativeVelocity.replace(',', ''))),
-             lunarDistance: lunarDistance,
-             absoluteMag: absoluteMag,
-             kilometers: formatNumber(parseInt(kilometers.replace(',', ''))),
-         });
-     }
+       var nearEarthObjects = [];// object.near_earth_objects ;
+       if(nearEarthObjects && nearEarthObjects.length==0) {
+           console.log(" neo is undefined ");
+           noAsteroidCard.show();
+       } else {
+           for(var i = 0; i < nearEarthObjects[todayDate].length; i++) {
+             var obj = nearEarthObjects[todayDate][i];
+             var lunarDistance = obj.close_approach_data[0].miss_distance.lunar;
+             var kilometers = obj.close_approach_data[0].miss_distance.kilometers;
+             var relativeVelocity = obj.close_approach_data[0].relative_velocity.kilometers_per_hour;
+             var absoluteMag = obj.absolute_magnitude_h;
+             asteroids.push( {
+               title: obj.name,
+               subtitle: "Lunar Distance " + lunarDistance,
+               relvel: formatNumber(parseInt(relativeVelocity.replace(',', ''))),
+               lunarDistance: lunarDistance,
+               absoluteMag: absoluteMag,
+               kilometers: formatNumber(parseInt(kilometers.replace(',', ''))),
+             });
+           }
+           asteroid_list.section(0).title ='Asteroid Today - (' + nearEarthObjects[todayDate].length + ')';
+           asteroid_list.show();
+         }
     splashWindow.hide();
-    asteroid_list.show();
   },
   function(error) {
     console.log('Failed fetching Asteroid data: ' + URL +  error);
