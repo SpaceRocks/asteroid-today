@@ -3,13 +3,13 @@ var ajax = require('ajax');
 var asteroids = [];
 
 function getMonthPlus(date) {
-    var month = date.getMonth()+1;
-    return month < 10 ? '0' + month : month; // ('' + month) for string result
+  var month = date.getMonth()+1;
+  return month < 10 ? '0' + month : month; // ('' + month) for string result
 }
 
 function getDayPlus(date) {
-    var day = date.getDate();
-    return day < 10 ? '0' + day : day; // ('' + day) for string result
+  var day = date.getDate();
+  return day < 10 ? '0' + day : day; // ('' + day) for string result
 }  
 
 function formatNumber (num) {
@@ -31,39 +31,41 @@ splashWindow.show();
 var d = new Date();
 var todayDate = d.getFullYear() + "-" + getMonthPlus(d) + "-" + getDayPlus(d);
 var asteroid_list = new UI.Menu({
-      sections: [{
-        title: 'Asteroid Today',
-        items: asteroids
-       }]
-     });
+  sections: [{
+    title: 'Asteroid Today',
+    items: asteroids
+  }]
+});
 
 var noAsteroidCard = new UI.Card({
-    body: "0 Asteroids Today"
-  });
+  body: "0 Asteroids Today"
+});
 
-     var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
-     console.log(" URL : " + URL);
-     ajax({
-       url: URL,
-       type: 'json',
-       headers: { 'x-request-neows': 'neows_pebble' }
-     },
+var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
+console.log(" URL : " + URL);
+
+ajax({
+  url: URL,
+  type: 'json',
+  headers: { 'x-request-neows': 'neows_pebble' }
+  },
      function(data) {
        // Success!
        // console.log("Successfully fetched Asteroid data!" + data);
        var object = data;
-       var nearEarthObjects = [];// object.near_earth_objects ;
-       if(nearEarthObjects && nearEarthObjects.length==0) {
-           console.log(" neo is undefined ");
-           noAsteroidCard.show();
+       var nearEarthObjects = object.near_earth_objects;
+       if(nearEarthObjects.length==0) {
+         // console.log(" neo is undefined ");
+         noAsteroidCard.show();
        } else {
+         try {
            for(var i = 0; i < nearEarthObjects[todayDate].length; i++) {
              var obj = nearEarthObjects[todayDate][i];
              var lunarDistance = obj.close_approach_data[0].miss_distance.lunar;
              var kilometers = obj.close_approach_data[0].miss_distance.kilometers;
              var relativeVelocity = obj.close_approach_data[0].relative_velocity.kilometers_per_hour;
              var absoluteMag = obj.absolute_magnitude_h;
-             asteroids.push( {
+             asteroids.push({
                title: obj.name,
                subtitle: "Lunar Distance " + lunarDistance,
                relvel: formatNumber(parseInt(relativeVelocity.replace(',', ''))),
@@ -74,12 +76,17 @@ var noAsteroidCard = new UI.Card({
            }
            asteroid_list.section(0).title ='Asteroid Today - (' + nearEarthObjects[todayDate].length + ')';
            asteroid_list.show();
+         } catch(err) {
+           console.log('Caught error' + err);
+           splashWindow.hide();
          }
-    splashWindow.hide();
-  },
-  function(error) {
-    console.log('Failed fetching Asteroid data: ' + URL +  error);
-  }
+       }
+       splashWindow.hide();
+     },
+     function(error) {
+       console.log('Failed fetching Asteroid data: ' + URL +  error);
+       splashWindow.hide();
+     }
 );
 
 asteroid_list.on('select', function(event) {
