@@ -42,7 +42,7 @@
             }
         ]
     },
-    "sdkVersion": "4",
+    "sdkVersion": "3",
     "shortName": "AsteroidToday",
     "targetPlatforms": [
         "aplite",
