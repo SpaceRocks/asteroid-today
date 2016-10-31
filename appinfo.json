@@ -6,6 +6,7 @@
     "companyName": "AsteroidTracker",
     "longName": "AsteroidToday",
     "projectType": "pebblejs",
+    "enableMultiJS": true,
     "resources": {
         "media": [
             {
