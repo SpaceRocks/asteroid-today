@@ -1,6 +1,8 @@
 var UI = require('ui');
 var ajax = require('ajax');
 var asteroids = [];
+var Platform = require('platform');
+var Feature = module.exports;
 
 function getMonthPlus(date) {
   var month = date.getMonth()+1;
@@ -41,7 +43,8 @@ var noAsteroidCard = new UI.Card({
   body: "0 Asteroids Today"
 });
 
-var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
+var URL = "http://www.neowsapp.com/rest/v1/feed/today";
+// var URL = "http://www.neowsapp.com/rest/v1/feed?start_date="+todayDate+"&end_date="+todayDate;
 console.log(" URL : " + URL);
 
 ajax({
@@ -74,7 +77,7 @@ ajax({
                kilometers: formatNumber(parseInt(kilometers.replace(',', ''))),
              });
            }
-           asteroid_list.section(0).title ='Asteroid Today - (' + nearEarthObjects[todayDate].length + ')';
+           asteroid_list.section(0).title ='AsteroidToday - ' + nearEarthObjects[todayDate].length;
            asteroid_list.show();
          } catch(err) {
            console.log('Caught error' + err);
@@ -102,7 +105,7 @@ asteroid_list.on('select', function(event) {
     showDetailsUI(content, event);
 });
 
-function showCardUI(content, event) {
+function showCardUI(content, event) { 
     var detailCard = new UI.Card({
       title: asteroids[event.itemIndex].title,
       body: content,
@@ -113,6 +116,12 @@ function showCardUI(content, event) {
 }
 
 function showDetailsUI(content, event) {
+  if (Feature.round) {
+     console.log(" neo is round ");    
+  } else {
+     console.log(" neo is not round ");
+    
+  }
   var detailsWindow = new UI.Window();
   var text = new UI.Text({
     position: new Vector2(0, 0),

@@ -10,19 +10,18 @@
         "media": [
             {
                 "file": "images/menu_icon.png",
-                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "images/logo_splash.png",
                 "name": "IMAGE_LOGO_SPLASH",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "images/tile_splash.png",
                 "name": "IMAGE_TILE_SPLASH",
-                "type": "png"
+                "type": "bitmap"
             },
             {
                 "file": "fonts/UbuntuMono-Regular.ttf",
@@ -30,9 +29,15 @@
                 "type": "font"
             },
             {
+                "file": "images/androidlogoicon.png",
+                "menuIcon": true,
+                "name": "IMAGES_ANDROIDLOGOICON_PNG",
+                "type": "bitmap"
+            },
+            {
                 "file": "images/androidlogo.png",
                 "name": "IMAGES_ANDROIDLOGO_PNG",
-                "type": "png"
+                "type": "bitmap"
             }
         ]
     },
@@ -40,11 +45,13 @@
     "shortName": "AsteroidToday",
     "targetPlatforms": [
         "aplite",
-        "basalt"
+        "basalt",
+        "chalk",
+        "diorite"
     ],
     "uuid": "09c71da6-c9f4-4ad5-a3b0-0d85d3431900",
     "versionCode": 1,
-    "versionLabel": "2.2",
+    "versionLabel": "3.0",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
